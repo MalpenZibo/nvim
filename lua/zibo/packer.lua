@@ -40,4 +40,7 @@ return require('packer').startup(function(use)
     }
 
     use("f-person/git-blame.nvim")
+    use("mg979/vim-visual-multi")
+    use("akinsho/toggleterm.nvim")
+    use("numTostr/Comment.nvim")
 end)

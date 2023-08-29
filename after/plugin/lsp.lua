@@ -26,7 +26,7 @@ lsp.on_attach(function(client, bufnr)
 
     local opts = { buffer = bufnr }
 
-    vim.keymap.set('n', '<leader>gq', function()
+    vim.keymap.set('n', '<leader>f', function()
         vim.lsp.buf.format({ async = false, timeout_ms = 10000 })
     end, opts)
 
