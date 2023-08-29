@@ -2,6 +2,20 @@ local lsp = require('lsp-zero')
 
 lsp.preset("recommended")
 
+lsp.ensure_installed({
+    'rust_analyzer'
+})
+
+lsp.configure('rust_analyzer', {
+    settings = {
+        ['rust-analyzer'] = {
+            checkOnSave = {
+                command = 'clippy'
+            },
+        },
+    },
+})
+
 -- Fix Undefined global 'vim'
 lsp.nvim_workspace()
 
