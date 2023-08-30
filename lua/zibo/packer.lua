@@ -8,7 +8,10 @@ return require('packer').startup(function(use)
     use {
         'nvim-telescope/telescope.nvim', tag = '0.1.2',
         -- or                            , branch = '0.1.x',
-        requires = { { 'nvim-lua/plenary.nvim' } }
+        requires = {
+            { 'nvim-lua/plenary.nvim' },
+            { "nvim-telescope/telescope-live-grep-args.nvim" }
+        }
     }
 
     use { "catppuccin/nvim", as = "catppuccin" }
@@ -43,4 +46,6 @@ return require('packer').startup(function(use)
     use("mg979/vim-visual-multi")
     use("akinsho/toggleterm.nvim")
     use("numTostr/Comment.nvim")
+    use("jose-elias-alvarez/null-ls.nvim")
+    use("jay-babu/mason-null-ls.nvim")
 end)
