@@ -16,6 +16,8 @@ lsp.configure("rust_analyzer", {
 	},
 })
 
+--lsp.configure("metals", { force_setup = true })
+
 -- Fix Undefined global 'vim'
 lsp.nvim_workspace()
 
@@ -35,12 +37,40 @@ lsp.setup_nvim_cmp({
 	mapping = cmp_mappings,
 })
 
+local builtin = require("telescope.builtin")
+
 lsp.on_attach(function(client, bufnr)
+	local opts = { buffer = bufnr, remap = false }
+
 	-- see :help lsp-zero-keybindings
 	-- to learn the available actions
-	lsp.default_keymaps({ buffer = bufnr })
-
-	local opts = { buffer = bufnr }
+	vim.keymap.set("n", "gd", function()
+		builtin.lsp_definitions()
+	end, opts)
+	vim.keymap.set("n", "K", function()
+		vim.lsp.buf.hover()
+	end, opts)
+	vim.keymap.set("n", "<leader>vd", function()
+		vim.diagnostic.open_float()
+	end, opts)
+	vim.keymap.set("n", "[d", function()
+		vim.diagnostic.goto_prev()
+	end, opts)
+	vim.keymap.set("n", "]d", function()
+		vim.diagnostic.goto_next()
+	end, opts)
+	vim.keymap.set("n", "<leader>vca", function()
+		vim.lsp.buf.code_action()
+	end, opts)
+	vim.keymap.set("n", "<leader>vrr", function()
+		vim.lsp.buf.references()
+	end, opts)
+	vim.keymap.set("n", "<leader>vrn", function()
+		vim.lsp.buf.rename()
+	end, opts)
+	vim.keymap.set("i", "<C-h>", function()
+		vim.lsp.buf.signature_help()
+	end, opts)
 
 	vim.keymap.set("n", "<leader>f", function()
 		vim.lsp.buf.format({ async = false, timeout_ms = 10000 })
