@@ -49,8 +49,15 @@ return require("packer").startup(function(use)
 	use("mg979/vim-visual-multi")
 	use("akinsho/toggleterm.nvim")
 	use("numTostr/Comment.nvim")
+	use("github/copilot.vim")
 	use("jose-elias-alvarez/null-ls.nvim")
 	use("jay-babu/mason-null-ls.nvim")
-	use("github/copilot.vim")
 	use("airblade/vim-gitgutter")
+	use({
+		"iamcco/markdown-preview.nvim",
+		run = function()
+			vim.fn["mkdp#util#install"]()
+		end,
+	})
+	use("lukas-reineke/indent-blankline.nvim")
 end)

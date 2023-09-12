@@ -16,6 +16,10 @@ lsp.configure("rust_analyzer", {
 	},
 })
 
+lsp.configure("html", {
+	filetypes = { "html", "htmldjango" },
+})
+
 --lsp.configure("metals", { force_setup = true })
 
 -- Fix Undefined global 'vim'
@@ -79,12 +83,33 @@ lsp.on_attach(function(client, bufnr)
 	lsp.buffer_autoformat()
 end)
 
+vim.diagnostic.config({
+	update_in_insert = true,
+})
+
 lsp.setup()
 
 local null_ls = require("null-ls")
 
 null_ls.setup({
-	sources = {},
+	sources = {
+		null_ls.builtins.formatting.prettierd.with({
+			filetypes = {
+				"javascript",
+				"typescript",
+				"css",
+				"scss",
+				"html",
+				"htmldjango",
+				"json",
+				"yaml",
+				"markdown",
+				"graphql",
+				"md",
+				"txt",
+			},
+		}),
+	},
 })
 
 require("mason-null-ls").setup({
