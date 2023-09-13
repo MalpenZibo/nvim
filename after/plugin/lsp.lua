@@ -101,7 +101,6 @@ null_ls.setup({
 				"scss",
 				"html",
 				"htmldjango",
-				"json",
 				"yaml",
 				"markdown",
 				"graphql",
