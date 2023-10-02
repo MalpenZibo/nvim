@@ -67,7 +67,7 @@ lsp.on_attach(function(client, bufnr)
 		vim.lsp.buf.code_action()
 	end, opts)
 	vim.keymap.set("n", "<leader>vrr", function()
-		vim.lsp.buf.references()
+		require("telescope.builtin").lsp_references()
 	end, opts)
 	vim.keymap.set("n", "<leader>vrn", function()
 		vim.lsp.buf.rename()
@@ -83,11 +83,13 @@ lsp.on_attach(function(client, bufnr)
 	lsp.buffer_autoformat()
 end)
 
+lsp.setup()
+
 vim.diagnostic.config({
 	update_in_insert = true,
+	virtual_text = false,
+	underline = true,
 })
-
-lsp.setup()
 
 local null_ls = require("null-ls")
 
