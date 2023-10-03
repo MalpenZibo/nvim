@@ -16,6 +16,7 @@ return require("packer").startup(function(use)
 	})
 
 	use({ "catppuccin/nvim", as = "catppuccin" })
+	use("nvim-tree/nvim-web-devicons")
 
 	use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
 	use("theprimeagen/harpoon")
@@ -66,4 +67,6 @@ return require("packer").startup(function(use)
 			require("guess-indent").setup({})
 		end,
 	})
+	use({ "typicode/bg.nvim" })
+	use({ "akinsho/bufferline.nvim", tag = "*", requires = { { "nvim-tree/nvim-web-devicons", opt = true } } })
 end)
