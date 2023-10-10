@@ -19,7 +19,6 @@ return require("packer").startup(function(use)
 	use("nvim-tree/nvim-web-devicons")
 
 	use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
-	use("theprimeagen/harpoon")
 	use("mbbill/undotree")
 	use("kdheepak/lazygit.nvim")
 
@@ -68,5 +67,6 @@ return require("packer").startup(function(use)
 		end,
 	})
 	use({ "typicode/bg.nvim" })
-	use({ "akinsho/bufferline.nvim", tag = "*", requires = { { "nvim-tree/nvim-web-devicons", opt = true } } })
+	use("lewis6991/gitsigns.nvim") -- OPTIONAL: for git status
+	use("romgrk/barbar.nvim")
 end)

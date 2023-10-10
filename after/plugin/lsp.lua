@@ -43,7 +43,7 @@ lsp.setup_nvim_cmp({
 
 local builtin = require("telescope.builtin")
 
-lsp.on_attach(function(bufnr)
+lsp.on_attach(function(client, bufnr)
 	local opts = { buffer = bufnr, remap = false }
 
 	-- see :help lsp-zero-keybindings
