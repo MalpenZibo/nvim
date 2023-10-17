@@ -80,7 +80,7 @@ lsp.on_attach(function(client, bufnr)
 		vim.lsp.buf.format({ async = false, timeout_ms = 10000 })
 	end, opts)
 
-	lsp.buffer_autoformat()
+	-- lsp.buffer_autoformat()
 end)
 
 lsp.setup()
