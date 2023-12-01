@@ -7,8 +7,6 @@ return require("packer").startup(function(use)
 
 	use({
 		"nvim-telescope/telescope.nvim",
-		tag = "0.1.2",
-		-- or                            , branch = '0.1.x',
 		requires = {
 			{ "nvim-lua/plenary.nvim" },
 			{ "nvim-telescope/telescope-live-grep-args.nvim" },
@@ -29,7 +27,7 @@ return require("packer").startup(function(use)
 
 	use({
 		"VonHeikemen/lsp-zero.nvim",
-		branch = "v1.x",
+		branch = "v3.x",
 		requires = {
 			-- LSP Support
 			{ "neovim/nvim-lspconfig" }, -- Required
@@ -43,13 +41,14 @@ return require("packer").startup(function(use)
 		},
 	})
 
-	--	use({ "scalameta/nvim-metals", requires = { "nvim-lua/plenary.nvim" } })
+	use({ "scalameta/nvim-metals", requires = { "nvim-lua/plenary.nvim" } })
 
 	use("f-person/git-blame.nvim")
 	use("mg979/vim-visual-multi")
 	use("akinsho/toggleterm.nvim")
 	use("numTostr/Comment.nvim")
-	use("github/copilot.vim")
+	use("zbirenbaum/copilot.lua")
+	use("zbirenbaum/copilot-cmp")
 	use("jose-elias-alvarez/null-ls.nvim")
 	use("jay-babu/mason-null-ls.nvim")
 	use("airblade/vim-gitgutter")
