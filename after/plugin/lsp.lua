@@ -109,7 +109,6 @@ cmp.setup({
 		documentation = cmp.config.window.bordered(),
 	},
 	sources = {
-		{ name = "copilot" },
 		{ name = "path" },
 		{ name = "nvim_lsp" },
 		{ name = "nvim_lua" },
@@ -124,17 +123,10 @@ cmp.setup({
 		["<C-e>"] = cmp_action.toggle_completion(),
 
 		-- tab complete
-		["<Tab>"] = vim.schedule_wrap(function(fallback)
-      if cmp.visible() and has_words_before() then
-        cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-      else
-        fallback()
-      end
-    end),
 		-- ["<Tab>"] = cmp_action.tab_complete(),
-		["<S-Tab>"] = cmp.mapping.select_prev_item(),
-		-- ["<C-p>"] = cmp.mapping.select_prev_item(),
-		-- ["<C-n>"] = cmp.mapping.select_next_item(),
+		-- ["<S-Tab>"] = cmp.mapping.select_prev_item(),
+		["<C-p>"] = cmp.mapping.select_prev_item(),
+		["<C-n>"] = cmp.mapping.select_next_item(),
 
 		-- navigate between snippet placeholder
 		["<C-d>"] = cmp_action.luasnip_jump_forward(),
