@@ -17,6 +17,7 @@ return {
           "lua_ls",
           "html",
           "rust_analyzer",
+          "tsserver",
         },
         handlers = {
           lsp_zero.default_setup,
@@ -203,7 +204,9 @@ return {
     "jay-babu/mason-null-ls.nvim",
     config = function()
       require("mason-null-ls").setup({
-        ensure_installed = nil,
+        ensure_installed = {
+          "prettierd",
+        },
         automatic_installation = false,
         handlers = {},
       })
