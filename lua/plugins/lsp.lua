@@ -18,9 +18,21 @@ return {
           "html",
           "rust_analyzer",
           "tsserver",
+          "eslint"
         },
         handlers = {
           lsp_zero.default_setup,
+          lua_ls = function()
+            lsp_config.lua_ls.setup({
+              settings = {
+                Lua = {
+                  diagnostics = {
+                    globals = { "vim" },
+                  },
+                },
+              },
+            })
+          end,
           rust_analyzer = function()
             lsp_config.rust_analyzer.setup({
               settings = {
@@ -119,12 +131,6 @@ return {
       local cmp_action = lsp_zero.cmp_action()
       local cmp_format = lsp_zero.cmp_format()
 
-      local has_words_before = function()
-        if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
-        local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-        return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
-      end
-
       cmp.setup({
         formatting = cmp_format,
         preselect = "item",
@@ -150,13 +156,7 @@ return {
           ["<C-e>"] = cmp_action.toggle_completion(),
 
           -- tab complete
-          ["<Tab>"] = vim.schedule_wrap(function(fallback)
-            if cmp.visible() and has_words_before() then
-              cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-            else
-              fallback()
-            end
-          end),
+          ["<Tab>"] = cmp.mapping.select_next_item(),
           -- ["<Tab>"] = cmp_action.tab_complete(),
           ["<S-Tab>"] = cmp.mapping.select_prev_item(),
           -- ["<C-p>"] = cmp.mapping.select_prev_item(),
@@ -175,7 +175,7 @@ return {
   },
   { 'L3MON4D3/LuaSnip' },
   {
-    "jose-elias-alvarez/null-ls.nvim",
+    "nvimtools/none-ls.nvim",
     config = function()
       local null_ls = require("null-ls")
 

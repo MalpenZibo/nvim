@@ -46,7 +46,12 @@ return {
         sections = {
           lualine_a = { "mode" },
           lualine_b = { "branch", "diff", "diagnostics" },
-          lualine_c = { "filename" },
+          lualine_c = { 
+            {
+              "filename",
+              path = 1
+            }
+          },
           lualine_x = {
             "encoding",
             {
@@ -178,4 +183,10 @@ return {
       map("n", "<A-p>", "<Cmd>BufferPick<CR>", opts)
     end
   },
+  {
+    "j-hui/fidget.nvim",
+    config = function()
+      require("fidget").setup({})
+    end
+  }
 }
