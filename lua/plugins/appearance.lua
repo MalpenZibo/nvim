@@ -46,7 +46,7 @@ return {
         sections = {
           lualine_a = { "mode" },
           lualine_b = { "branch", "diff", "diagnostics" },
-          lualine_c = { 
+          lualine_c = {
             {
               "filename",
               path = 1
@@ -87,8 +87,8 @@ return {
     "nvim-tree/nvim-tree.lua",
     config = function()
       -- disable netrw at the very start of your init.lua
-      vim.g.loaded_netrw = 1
-      vim.g.loaded_netrwPlugin = 1
+      -- vim.g.loaded_netrw = 1
+      -- vim.g.loaded_netrwPlugin = 1
 
       local HEIGHT_RATIO = 0.8 -- You can change this
       local WIDTH_RATIO = 0.5  -- You can change this too
@@ -115,23 +115,23 @@ return {
       end
 
       require("nvim-tree").setup({
-        disable_netrw = true,
-        hijack_netrw = true,
-        respect_buf_cwd = true,
+        disable_netrw      = false,
+        hijack_netrw       = false,
+        respect_buf_cwd    = true,
         sync_root_with_cwd = true,
-        view = {
+        view               = {
           relativenumber = true,
           float = {
             enable = true,
             open_win_config = function()
               local screen_w = vim.opt.columns:get()
-              local screen_h = vim.opt.lines:get() - vim.opt.cmdheight:get()
+              local screen_h = vim.opt.lines:get()
               local window_w = screen_w * WIDTH_RATIO
               local window_h = screen_h * HEIGHT_RATIO
               local window_w_int = math.floor(window_w)
               local window_h_int = math.floor(window_h)
               local center_x = (screen_w - window_w) / 2
-              local center_y = ((vim.opt.lines:get() - window_h) / 2) - vim.opt.cmdheight:get()
+              local center_y = ((vim.opt.lines:get() - window_h) / 2)
               return {
                 border = "rounded",
                 relative = "editor",
@@ -146,7 +146,7 @@ return {
             return math.floor(vim.opt.columns:get() * WIDTH_RATIO)
           end,
         },
-        on_attach = my_on_attach,
+        on_attach          = my_on_attach,
       })
     end
   },
@@ -184,9 +184,46 @@ return {
     end
   },
   {
-    "j-hui/fidget.nvim",
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+      "MunifTanjim/nui.nvim",
+      -- OPTIONAL:
+      --   `nvim-notify` is only needed, if you want to use the notification view.
+      --   If not available, we use `mini` as the fallback
+      "rcarriga/nvim-notify",
+    },
     config = function()
-      require("fidget").setup({})
-    end
+      require("noice").setup({
+        cmdline = {
+          opts = {},
+        },
+        lsp = {
+          -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+          override = {
+            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+            ["vim.lsp.util.stylize_markdown"] = true,
+            ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+          },
+        },
+        -- you can enable a preset for easier configuration
+        presets = {
+          bottom_search = false,        -- use a classic bottom cmdline for search
+          command_palette = true,       -- position the cmdline and popupmenu together
+          long_message_to_split = true, -- long messages will be sent to a split
+          inc_rename = false,           -- enables an input dialog for inc-rename.nvim
+          lsp_doc_border = true,        -- add a border to hover docs and signature help
+        },
+      })
+
+      vim.keymap.set("n", "<leader>nl", function()
+        require("noice").cmd("last")
+      end)
+
+      vim.keymap.set("n", "<leader>nh", function()
+        require("noice").cmd("telescope")
+      end)
+    end,
   }
 }
