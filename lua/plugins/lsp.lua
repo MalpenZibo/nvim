@@ -51,6 +51,14 @@ return {
               filetypes = { "html", "htmldjango" },
             })
           end,
+          tsserver = function()
+            lsp_config.tsserver.setup({
+              on_init = function(client)
+                client.server_capabilities.documentFormattingProvider = false
+                client.server_capabilities.documentFormattingRangeProvider = false
+              end
+            })
+          end,
         },
       })
     end
