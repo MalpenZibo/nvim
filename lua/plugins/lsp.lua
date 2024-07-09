@@ -70,6 +70,30 @@ return {
       local lsp_zero = require("lsp-zero")
 
       local builtin = require("telescope.builtin")
+
+      local function goto_highest_severity(direction)
+        local current_buf = vim.api.nvim_get_current_buf()
+        local diagnostics = vim.diagnostic.get(current_buf)
+        if #diagnostics == 0 then
+          return
+        end
+
+        -- Sort diagnostics by severity (ascending, so highest severity is first)
+        table.sort(diagnostics, function(a, b)
+          return a.severity < b.severity
+        end)
+
+        -- Set the severity filter to start from the highest severity present
+        local severity_filter = { severity = { min = diagnostics[1].severity } }
+
+        -- Use goto_next to jump to the first diagnostic in the sorted list
+        if direction == "prev" then
+          vim.diagnostic.goto_prev(severity_filter)
+        else
+          vim.diagnostic.goto_next(severity_filter)
+        end
+      end
+
       lsp_zero.on_attach(function(client, bufnr)
         local opts = { buffer = bufnr, remap = false }
 
@@ -85,10 +109,10 @@ return {
           vim.diagnostic.open_float()
         end, opts)
         vim.keymap.set("n", "[d", function()
-          vim.diagnostic.goto_prev()
+          goto_highest_severity("prev")
         end, opts)
         vim.keymap.set("n", "]d", function()
-          vim.diagnostic.goto_next()
+          goto_highest_severity("next")
         end, opts)
         vim.keymap.set("n", "<leader>vca", function()
           vim.lsp.buf.code_action()
@@ -119,7 +143,7 @@ return {
         update_in_insert = true,
         virtual_text = false,
         underline = true,
-        severity_sort = true,
+        severity_sort = false,
         float = {
           style = "minimal",
           border = "rounded",
