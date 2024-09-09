@@ -6,6 +6,45 @@ return {
     end
   },
   {
+    "ellisonleao/glow.nvim",
+    config = function()
+      require("glow").setup({
+        border = "rounded",
+      })
+    end,
+    cmd = "Glow"
+  },
+  {
+    "chrisgrieser/nvim-spider",
+    lazy = false,
+    keys = {
+      {
+        "w",
+        "<cmd>lua require('spider').motion('w')<CR>",
+        mode = { "n", "o", "x" },
+      },
+      {
+        "e",
+        "<cmd>lua require('spider').motion('e')<CR>",
+        mode = { "n", "o", "x" },
+      },
+      {
+
+        "b",
+        "<cmd>lua require('spider').motion('b')<CR>",
+        mode = { "n", "o", "x" },
+      },
+    },
+    config = function()
+      require("spider").setup {
+        skipInsignificantPunctuation = false,
+        consistentOperatorPending = true, -- see "Consistent Operator-pending Mode" in the README
+        subwordMovement = true,
+        customPatterns = {},        -- check "Custom Movement Patterns" in the README for details
+      }
+    end
+  },
+  {
     "numTostr/Comment.nvim",
     config = function()
       require("Comment").setup()

@@ -19,7 +19,7 @@ return {
           "lua_ls",
           "html",
           "rust_analyzer",
-          "tsserver",
+          "ts_ls",
           "eslint"
         },
         handlers = {
@@ -51,8 +51,8 @@ return {
               filetypes = { "html", "htmldjango" },
             })
           end,
-          tsserver = function()
-            lsp_config.tsserver.setup({
+          ts_ls = function()
+            lsp_config.ts_ls.setup({
               on_init = function(client)
                 client.server_capabilities.documentFormattingProvider = false
                 client.server_capabilities.documentFormattingRangeProvider = false
@@ -219,6 +219,7 @@ return {
             filetypes = {
               "javascript",
               "typescript",
+              "typescriptreact",
               "css",
               "scss",
               "html",
@@ -228,6 +229,7 @@ return {
               "graphql",
               "md",
               "txt",
+              "json"
             },
           }),
         },
