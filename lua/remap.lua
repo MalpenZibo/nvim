@@ -31,8 +31,6 @@ vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz", { silent = true, desc = "Pr
 
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Search and replace" })
 
-vim.keymap.set("n", "<leader>nd", "<cmd>NoiceDismiss<CR>", { desc = "Dismiss noice messages" })
-
 vim.keymap.set("n", "<C-s>", "<cmd>update<CR>", { desc = "Save file" })
 
 vim.keymap.set("n", "<C-h>", "<C-w>h", { noremap = true })
