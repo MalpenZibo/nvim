@@ -7,6 +7,14 @@ return {
           border = "rounded",
         },
       },
+      server = {
+        settings = {
+          ["rust-analyzer"] = {
+            procMacro = { enable = true },
+            checkOnSave = { command = "clippy" },
+          },
+        },
+      },
     },
   },
 }
