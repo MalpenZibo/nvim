@@ -29,6 +29,11 @@ return {
         menu = {
           border = "rounded",
         },
+        documentation = {
+          window = {
+            border = "rounded",
+          },
+        },
       },
     },
   },
