@@ -7,6 +7,10 @@ return {
   {
     "neovim/nvim-lspconfig",
     opts = {
+      diagnostics = {
+        virtual_text = false,
+        virtual_lines = true,
+      },
       inlay_hints = { enabled = false },
       servers = {
         eslint = {
@@ -15,42 +19,17 @@ return {
         vtsls = {
           root_dir = get_root_dir,
         },
-      },
-    },
-  },
-  {
-    "williamboman/mason.nvim",
-    opts = { ui = { border = "rounded" } },
-  },
-  {
-    "saghen/blink.cmp",
-    opts = {
-      completion = {
-        menu = {
-          border = "rounded",
-        },
-        documentation = {
-          window = {
-            border = "rounded",
+        zls = {
+          settings = {
+            zls = {
+              -- enable_build_on_save = true,
+              -- build_on_save_step = "check", -- make sure this matches your step name
+              -- semantic_tokens = "none",
+              -- retain_build_on_save_results = true,
+              enable_build_on_save = true,
+              semantic_tokens = "partial",
+            },
           },
-        },
-      },
-    },
-  },
-  {
-    "folke/noice.nvim",
-    opts = {
-      presets = {
-        lsp_doc_border = true,
-      },
-    },
-  },
-  {
-    "neovim/nvim-lspconfig",
-    opts = {
-      diagnostics = {
-        float = {
-          border = "rounded",
         },
       },
     },
