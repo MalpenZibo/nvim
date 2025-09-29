@@ -3,3 +3,4 @@
 -- Add any additional options here
 
 vim.opt.colorcolumn = "100"
+vim.g.ai_cmp = false

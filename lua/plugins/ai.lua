@@ -16,13 +16,6 @@ return {
     },
   },
   {
-    "zbirenbaum/copilot.lua",
-    opts = function()
-      LazyVim.cmp.actions.ai_accept = nil
-    end,
-  },
-  { "zbirenbaum/copilot-cmp", enabled = false },
-  {
     "folke/snacks.nvim",
     init = function()
       vim.api.nvim_create_autocmd("User", {
