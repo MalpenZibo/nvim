@@ -1,19 +1,23 @@
 return {
   {
     "zbirenbaum/copilot.lua",
-    opts = {
-      panel = {
-        keymap = {
-          open = "<M-o>",
+    opts = function()
+      LazyVim.cmp.actions.ai_accept = nil
+
+      return {
+        panel = {
+          keymap = {
+            open = "<M-o>",
+          },
         },
-      },
-      suggestion = {
-        enabled = true,
-        keymap = {
-          accept = "<M-CR>",
+        suggestion = {
+          enabled = true,
+          keymap = {
+            accept = "<M-CR>",
+          },
         },
-      },
-    },
+      }
+    end,
   },
   {
     "folke/snacks.nvim",
